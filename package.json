@@ -1,0 +1,25 @@
+{
+  "name": "BannoDemo-frontend",
+  "version": "1.0.0",
+  "main": "dist/Main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build_prod": "pulp build --main Main --to dist/Main.js",
+    "watch_prod": "pulp --watch build --main Main --to dist/Main.js",
+    "build_dev": "pulp build --main MainDev --to dist/MainDev.js",
+    "watch_dev": "pulp --watch build --main MainDev --to dist/MainDev.js"
+  },
+  "private": true,
+  "author": "Peter Becich",
+  "devDependencies": {
+    "create-react-class": "^15.6.2",
+    "pulp": "^12.0.1",
+    "purescript": "^0.11.7",
+    "purescript-psa": "^0.5.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "uuid-validate": "0.0.2"
+  }
+}
