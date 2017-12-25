@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+  - "node"
+
+cache:
+  directories:
+    - "node_modules"
+    - "bower_components"
+  
+before_script:
+  - npm install -g purescript
+  - npm install -g pulp bower
+  - bower install
+
+script:
+  - pulp build
+  - pulp browserify --to static/Main.js
+
+  
