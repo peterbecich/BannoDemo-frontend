@@ -1,15 +1,15 @@
 {
   "name": "BannoDemo-frontend",
   "version": "1.0.0",
-  "main": "dist/Main.js",
+  "main": "static/Main.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "build_prod": "pulp build --main Main --to dist/Main.js",
-    "watch_prod": "pulp --watch build --main Main --to dist/Main.js",
-    "build_dev": "pulp build --main MainDev --to dist/MainDev.js",
-    "watch_dev": "pulp --watch build --main MainDev --to dist/MainDev.js"
+    "build_prod": "pulp build --main Main --to static/Main.js",
+    "watch_prod": "pulp --watch build --main Main --to static/Main.js",
+    "build_dev": "pulp build --main MainDev --to static/MainDev.js",
+    "watch_dev": "pulp --watch build --main MainDev --to static/MainDev.js"
   },
   "private": true,
   "author": "Peter Becich",
