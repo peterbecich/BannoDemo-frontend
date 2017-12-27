@@ -6,6 +6,8 @@ cache:
   directories:
     - "node_modules"
     - "bower_components"
+    - "output"
+    - ".pulp-cache"
   
 before_script:
   - npm install -g purescript
