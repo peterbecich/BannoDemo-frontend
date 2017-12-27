@@ -23,6 +23,8 @@ main = do
   _ <- launchAff $ do
     stats <- retrieveTwitterStats ""
     liftEff $ log $ show stats
+    liftEff $ T.defaultMain statsThermite unit unit     
+
+  pure unit
   
-  T.defaultMain statsThermite unit unit 
   
