@@ -24,10 +24,12 @@ import RetrieveTwitterStats (retrieveTwitterStats)
 
 import Types.TwitterStats
 
-statsThermite :: T.Spec _ _ _ _
+data StatsActions = StartTimer
+
+statsThermite :: T.Spec _ _ _ StatsActions
 statsThermite = T.simpleSpec statsAction statsRender
   where
-    statsAction :: T.PerformAction _ _ _ _
+    statsAction :: T.PerformAction _ _ _ StatsActions
     statsAction _ _ _ = tickLoop
     
     statsRender :: T.Render TwitterStats _ _

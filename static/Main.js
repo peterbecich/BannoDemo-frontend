@@ -51052,37 +51052,44 @@ var statsReactComponent = function (statsSpec) {
         return React.createClass((Thermite.createReactSpec(statsSpec)(stats)).spec);
     };
 };
-var main = function __do() {
-    Control_Monad_Eff_Console.log("Hello sailor!")();
-    var v = Control_Monad_Aff.launchAff(Control_Bind.bind(Control_Monad_Aff.bindAff)(RetrieveTwitterStats.retrieveTwitterStats(""))(function (v) {
-        return Control_Bind.discard(Control_Bind.discardUnit)(Control_Monad_Aff.bindAff)(Control_Monad_Eff_Class.liftEff(Control_Monad_Aff.monadEffAff)(Control_Monad_Eff_Console.log(Data_Show.show(Data_Either.showEither(Data_List_Types.showNonEmptyList(Data_Foreign.showForeignError))(Types_TwitterStats.showTwitterStats))(v))))(function () {
-            if (v instanceof Data_Either.Left) {
-                return Control_Monad_Eff_Class.liftEff(Control_Monad_Aff.monadEffAff)(Thermite.defaultMain(StatsThermite.errorThermite)(Data_Unit.unit)(Data_Unit.unit));
+var main = (function () {
+    var renderStats = function (stats) {
+        var reactSpecDispatcher = Thermite.createReactSpec(StatsThermite.statsThermite)(stats);
+        var reactClass = React.createClass(React.spec(stats)(function (ctx) {
+            return reactSpecDispatcher.spec.render(ctx);
+        }));
+        var reactElement = React.createFactory(reactClass)(Data_Unit.unit);
+        var ui = React_DOM["div'"]([ reactElement ]);
+        return Data_Functor["void"](Control_Monad_Eff.functorEff)(Control_Monad_Eff_Class.liftEff(Control_Monad_Eff_Class.monadEffEff)(function __do() {
+            var v = DOM_HTML.window();
+            var v1 = DOM_HTML_Window.document(v)();
+            var nonElementNode = DOM_HTML_Types.htmlDocumentToNonElementParentNode(v1);
+            var v2 = DOM_Node_NonElementParentNode.getElementById("foo")(nonElementNode)();
+            if (v2 instanceof Data_Maybe.Just) {
+                return ReactDOM.render(ui)(v2.value0)();
             };
-            if (v instanceof Data_Either.Right) {
-                var reactSpecDispatcher = Thermite.createReactSpec(StatsThermite.statsThermite)(v.value0);
-                var reactClass = React.createClass(reactSpecDispatcher.spec);
-                var reactElement = React.createFactory(reactClass)(Data_Unit.unit);
-                var ui = React_DOM["div'"]([ reactElement ]);
-                return Data_Functor["void"](Control_Monad_Aff.functorAff)(Control_Monad_Eff_Class.liftEff(Control_Monad_Aff.monadEffAff)(function __do() {
-                    var v1 = DOM_HTML.window();
-                    var v2 = DOM_HTML_Window.document(v1)();
-                    var nonElementNode = DOM_HTML_Types.htmlDocumentToNonElementParentNode(v2);
-                    var v3 = DOM_Node_NonElementParentNode.getElementById("foo")(nonElementNode)();
-                    if (v3 instanceof Data_Maybe.Just) {
-                        return ReactDOM.render(ui)(v3.value0)();
-                    };
-                    if (v3 instanceof Data_Maybe.Nothing) {
-                        return Data_Maybe.Nothing.value;
-                    };
-                    throw new Error("Failed pattern match at Main line 70, column 11 - line 72, column 38: " + [ v3.constructor.name ]);
-                }));
+            if (v2 instanceof Data_Maybe.Nothing) {
+                return Data_Maybe.Nothing.value;
             };
-            throw new Error("Failed pattern match at Main line 46, column 5 - line 72, column 38: " + [ v.constructor.name ]);
-        });
-    }))();
-    return Data_Unit.unit;
-};
+            throw new Error("Failed pattern match at Main line 97, column 9 - line 99, column 29: " + [ v2.constructor.name ]);
+        }));
+    };
+    return function __do() {
+        Control_Monad_Eff_Console.log("Hello sailor!")();
+        var v = Control_Monad_Aff.launchAff(Control_Bind.bind(Control_Monad_Aff.bindAff)(RetrieveTwitterStats.retrieveTwitterStats(""))(function (v) {
+            return Control_Bind.discard(Control_Bind.discardUnit)(Control_Monad_Aff.bindAff)(Control_Monad_Eff_Class.liftEff(Control_Monad_Aff.monadEffAff)(Control_Monad_Eff_Console.log(Data_Show.show(Data_Either.showEither(Data_List_Types.showNonEmptyList(Data_Foreign.showForeignError))(Types_TwitterStats.showTwitterStats))(v))))(function () {
+                if (v instanceof Data_Either.Left) {
+                    return Control_Monad_Eff_Class.liftEff(Control_Monad_Aff.monadEffAff)(Thermite.defaultMain(StatsThermite.errorThermite)(Data_Unit.unit)(Data_Unit.unit));
+                };
+                if (v instanceof Data_Either.Right) {
+                    return Control_Monad_Eff_Class.liftEff(Control_Monad_Aff.monadEffAff)(renderStats(v.value0));
+                };
+                throw new Error("Failed pattern match at Main line 66, column 5 - line 68, column 51: " + [ v.constructor.name ]);
+            });
+        }))();
+        return Data_Unit.unit;
+    };
+})();
 module.exports = {
     statsReactComponent: statsReactComponent,
     main: main
@@ -53690,6 +53697,13 @@ var React_DOM_Props = require("../React.DOM.Props");
 var RetrieveTwitterStats = require("../RetrieveTwitterStats");
 var Thermite = require("../Thermite");
 var Types_TwitterStats = require("../Types.TwitterStats");
+var StartTimer = (function () {
+    function StartTimer() {
+
+    };
+    StartTimer.value = new StartTimer();
+    return StartTimer;
+})();
 var tickLoop = Control_Bind.bind(Control_Monad_Free_Trans.bindFreeT(Control_Coroutine.functorCoTransform)(Control_Monad_Aff.monadAff))(Control_Monad_Eff_Class.liftEff(Control_Monad_Free_Trans.monadEffFreeT(Control_Coroutine.functorCoTransform)(Control_Monad_Aff.monadEffAff))(Control_Monad_Eff_Console.log(Data_Show.show(Data_Show.showString)("tick loop"))))(function (v) {
     return Control_Bind.bind(Control_Monad_Free_Trans.bindFreeT(Control_Coroutine.functorCoTransform)(Control_Monad_Aff.monadAff))(Control_Monad_Trans_Class.lift(Control_Monad_Free_Trans.monadTransFreeT(Control_Coroutine.functorCoTransform))(Control_Monad_Aff.monadAff)(Control_Monad_Aff.delay(Data_Newtype.wrap(Data_Time_Duration.newtypeMilliseconds)(1000.0))))(function (v1) {
         return Control_Bind.bind(Control_Monad_Free_Trans.bindFreeT(Control_Coroutine.functorCoTransform)(Control_Monad_Aff.monadAff))(Control_Monad_Eff_Class.liftEff(Control_Monad_Free_Trans.monadEffFreeT(Control_Coroutine.functorCoTransform)(Control_Monad_Aff.monadEffAff))(Control_Monad_Aff.launchAff(Control_Bind.bind(Control_Monad_Aff.bindAff)(RetrieveTwitterStats.retrieveTwitterStats(""))(function (v2) {
@@ -53731,6 +53745,7 @@ var errorThermite = (function () {
     return Thermite.simpleSpec(Thermite.defaultPerformAction)(errorRender);
 })();
 module.exports = {
+    StartTimer: StartTimer,
     statsThermite: statsThermite,
     tickLoop: tickLoop,
     errorThermite: errorThermite
