@@ -81,6 +81,7 @@ main = do
         reactSpecRender = reactSpecDispatcher.spec.render
 
         reactClass = R.createClass $ R.spec stats \ctx -> do
+          -- TODO start loop of reloading stats data every second
           -- _ <- reactSpecDispatcher.dispatcher ctx StartTimer
           reactSpecRender ctx
 
