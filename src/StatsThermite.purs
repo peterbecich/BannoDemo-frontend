@@ -10,6 +10,8 @@ import Control.Monad.Trans.Class (lift)
 
 import Control.Monad.Eff.Console (CONSOLE, log)
 
+import Data.Number.Format
+
 import Data.Newtype (wrap)
 
 import Data.Either
@@ -34,9 +36,27 @@ statsThermite = T.simpleSpec statsAction statsRender
     
     statsRender :: T.Render TwitterStats _ _
     -- statsRender _ _ _ _ = [ R.p'  [ R.text "Tweet count: " ] ]
-    statsRender _ _ (TwitterStats {tweetCount, emojiTweetCount, urlTweetCount, picTweetCount, hashtagTweetCount}) _ =
+    statsRender _ _ (TwitterStats {
+                        tweetCount
+                        , emojiTweetCount
+                        , emojiPercentage
+                        , urlTweetCount
+                        , urlPercentage
+                        , picTweetCount
+                        , picPercentage
+                        , hashtagTweetCount
+                        , hashtagPercentage
+                        }) _ =
       [ R.p'  [ R.text "Tweet count: ", R.text (show tweetCount) ]
       , R.p'  [ R.text "Emoji tweet count: ", R.text (show emojiTweetCount) ]
+      , R.p'  [ R.text "Emoji tweet percentage: ", R.text (toStringWith (fixed 4) emojiPercentage) ]
+      , R.p'  [ R.text "URL tweet count: ", R.text (show urlTweetCount) ]
+      , R.p'  [ R.text "URL tweet percentage: ", R.text (toStringWith (fixed 4)  urlPercentage ) ]
+      , R.p'  [ R.text "Pic tweet count: ", R.text (show picTweetCount) ]
+      , R.p'  [ R.text "Pic tweet percentage: ", R.text (toStringWith (fixed 4)  picPercentage) ]
+      , R.p'  [ R.text "Hashtag tweet count: ", R.text (show hashtagTweetCount) ]
+      , R.p'  [ R.text "Hashtag tweet percentage: ", R.text (toStringWith (fixed 4)  hashtagPercentage) ]
+        
       ]
 
 tickLoop :: T.CoTransformer _ _ _ _
